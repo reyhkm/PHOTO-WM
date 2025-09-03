@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
+import { useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { applyWatermark } from '../utils/watermarkUtils';
 
 interface WatermarkCanvasProps {
