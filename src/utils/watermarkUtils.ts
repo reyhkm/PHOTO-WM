@@ -10,7 +10,7 @@ export const applyWatermark = (
     }
 
     const img = new Image();
-    img.crossOrigin = 'anonymous'; // Needed for images from different origins if applicable
+    img.crossOrigin = 'anonymous';
     img.src = imageUrl;
 
     img.onload = () => {
@@ -21,29 +21,39 @@ export const applyWatermark = (
       // Draw the original image
       ctx.drawImage(img, 0, 0);
 
-      // Apply watermark
-      ctx.font = `${Math.max(20, img.width / 30)}px 'Inter', sans-serif`; // Responsive font size
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.6)'; // White, semi-transparent
-      ctx.textAlign = 'right';
-      ctx.textBaseline = 'bottom';
+      // --- Start of Tiled Watermark Logic ---
 
-      const padding = Math.max(10, img.width / 100); // Responsive padding
-      const x = canvas.width - padding;
-      const y = canvas.height - padding;
+      // Watermark style
+      const fontSize = Math.max(24, img.width / 25);
+      ctx.font = `bold ${fontSize}px 'Inter', sans-serif`;
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.25)'; // Semi-transparent white
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
 
-      // Add a subtle shadow for better readability
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
-      ctx.shadowBlur = 5;
-      ctx.shadowOffsetX = 2;
-      ctx.shadowOffsetY = 2;
+      // Measure text to calculate spacing
+      const textMetrics = ctx.measureText(watermarkText);
+      
+      // Define the gap between repetitions
+      const gapX = textMetrics.width * 1.5;
+      const gapY = fontSize * 4;
 
-      ctx.fillText(watermarkText, x, y);
+      const angle = -Math.PI / 4; // -45 degrees
 
-      // Reset shadow for subsequent drawings if any
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = 0;
+      // Loop through the canvas to draw the tiled watermark
+      for (let y = 0; y < canvas.height + gapY; y += gapY) {
+        for (let x = 0; x < canvas.width + gapX; x += gapX) {
+          ctx.save();
+          // Translate and rotate the canvas context
+          ctx.translate(x, y);
+          ctx.rotate(angle);
+          // Draw the text
+          ctx.fillText(watermarkText, 0, 0);
+          // Restore the original context state
+          ctx.restore();
+        }
+      }
+
+      // --- End of Tiled Watermark Logic ---
 
       resolve();
     };
