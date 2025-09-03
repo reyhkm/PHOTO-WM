@@ -24,7 +24,7 @@ export const applyWatermark = (
       // --- Start of Tiled Watermark Logic ---
 
       // Watermark style
-      const fontSize = Math.max(24, img.width / 20);
+      const fontSize = Math.max(24, img.width / 15);
       ctx.font = `bold ${fontSize}px 'Inter', sans-serif`;
       ctx.fillStyle = 'rgba(255, 255, 255, 0.8)'; // Increased opacity
       ctx.textAlign = 'center';
