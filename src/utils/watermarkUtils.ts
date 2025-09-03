@@ -26,16 +26,16 @@ export const applyWatermark = (
       // Watermark style
       const fontSize = Math.max(24, img.width / 25);
       ctx.font = `bold ${fontSize}px 'Inter', sans-serif`;
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.25)'; // Semi-transparent white
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)'; // Increased opacity
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
       // Measure text to calculate spacing
       const textMetrics = ctx.measureText(watermarkText);
       
-      // Define the gap between repetitions
-      const gapX = textMetrics.width * 1.5;
-      const gapY = fontSize * 4;
+      // Define the gap between repetitions (reduced for more density)
+      const gapX = textMetrics.width * 1.2;
+      const gapY = fontSize * 3;
 
       const angle = -Math.PI / 4; // -45 degrees
 
