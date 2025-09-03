@@ -6,7 +6,7 @@ import WatermarkCanvas, { WatermarkCanvasRef } from './components/WatermarkCanva
 
 function App() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [watermarkText, setWatermarkText] = useState<string>("YourBrandName.com | DM for original");
+  const [watermarkText, setWatermarkText] = useState<string>("Protected Image");
   const canvasRef = useRef<WatermarkCanvasRef>(null);
 
   const handleImageSelect = (imageUrl: string) => {
@@ -49,11 +49,11 @@ function App() {
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   value={watermarkText}
                   onChange={(e) => setWatermarkText(e.target.value)}
-                  placeholder="e.g., YourBrand.com | DM for original"
+                  placeholder="e.g., Your Brand Name"
                 />
               </div>
               <p className="text-sm text-gray-500 mb-4">
-                This text will be subtly added to your image.
+                This text will be repeated across your image to protect it.
               </p>
             </div>
           </div>
