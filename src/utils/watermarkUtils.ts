@@ -26,7 +26,7 @@ export const applyWatermark = (
       // Watermark style
       const fontSize = Math.max(24, img.width / 25);
       ctx.font = `bold ${fontSize}px 'Inter', sans-serif`;
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)'; // Increased opacity
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)'; // Increased opacity
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
