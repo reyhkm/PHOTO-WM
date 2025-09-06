@@ -21,12 +21,18 @@ export const applyWatermark = (
       // Draw the original image
       ctx.drawImage(img, 0, 0);
 
+      // If watermark text is empty, we're done.
+      if (!watermarkText || watermarkText.trim() === '') {
+        resolve();
+        return;
+      }
+
       // --- Start of Tiled Watermark Logic ---
 
       // Watermark style
-      const fontSize = Math.max(24, img.width / 27);
+      const fontSize = Math.max(24, img.width / 25);
       ctx.font = `bold ${fontSize}px 'Inter', sans-serif`;
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)'; // Increased opacity
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.5)'; // Darker, more aggressive watermark
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
